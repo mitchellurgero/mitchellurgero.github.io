@@ -13,18 +13,11 @@
 {% if include.metadata %}
   <div class="f4 mb-6">
     {% if user.name %}
+	<h3>GitHub</h3>
       <div class="{{ metadata_styles }}">
         {% octicon mark-github height:20 class:"mr-2 v-align-middle" fill:{{ icon_color }} aria-label:GitHub %}
         <a href="https://github.com/{{ user.login }}" {% if site.style == 'dark' %}class="text-white"{% endif %}>
           @{{ user.login }}
-        </a>
-      </div>
-    {% endif %}
-    {% if user.email %}
-      <div class="{{ metadata_styles }}">
-        {% octicon mail height:20 class:"mr-2 v-align-middle" fill:{{ icon_color }} aria-label:email %}
-        <a href="mailto:{{ user.email }}" {% if site.style == 'dark' %}class="text-white"{% endif %}>
-          {{ user.email }}
         </a>
       </div>
     {% endif %}
@@ -34,8 +27,27 @@
         {{ user.location }}
       </div>
     {% endif %}
-    {% if user.hireable %}
-      <span title="Hire me" class="d-inline-block f5 rounded-2 text-white bg-green py-1 px-2">Available for hire</span>
-    {% endif %}
   </div>
+  {% if site.social %}
+    <h3>Social Networks</h3>
+    {% for net in site.social %}
+	  <div class="{{ metadata_styles }}">
+        {% octicon arrow-small-right height:20 class:"mr-2 v-align-middle" fill:{{ icon_color }} aria-label:Social %}
+        <a href="{{ net.urll }}" {% if site.style == 'dark' %}class="text-white"{% endif %}>
+          {{ net.name }}
+        </a>
+      </div>
+	{% endfor %}
+  {% endif %}
+  {% if site.donations %}
+      <h3>Donations</h3>
+	{% for net in site.donations %}
+	  <div class="{{ metadata_styles }}">
+        {% octicon arrow-small-right height:20 class:"mr-2 v-align-middle" fill:{{ icon_color }} aria-label:Social %}
+        <a href="{{ net.urll }}" {% if site.style == 'dark' %}class="text-white"{% endif %}>
+          {{ net.name }}
+        </a>
+      </div>
+	{% endfor %}
+  {% endif %}
 {% endif %}
