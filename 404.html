@@ -1,0 +1,15 @@
+---
+layout: default
+title: Not found
+permalink: /404.html
+sitemap: false
+---
+{%- assign term_ms = 150 -%}
+
+{%- capture out -%}
+<p class="error">cd: no such file or directory</p>
+<p><a href="{{ '/' | relative_url }}">cd ~</a> <span class="dim"># back to the start</span></p>
+{%- endcapture -%}
+{% include step.html cmd="cd ./that-page" out=out label="Page not found" %}
+
+{% include idle.html %}

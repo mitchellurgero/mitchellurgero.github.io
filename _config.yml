@@ -1,0 +1,46 @@
+title: Mitchell Urgero
+description: IT consultant by day, freelance programmer by night. Retro computers, servers, and the occasional blog post.
+url: https://urgero.org
+baseurl: ""
+lang: en
+
+author:
+  name: Mitchell Urgero
+  handle: mitchell
+  github: mitchellurgero
+
+terminal:
+  host: urgero
+
+permalink: /blog/:year/:month/:day/:title/
+timezone: America/Chicago
+
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter_opts:
+    disable: true
+
+plugins:
+  - jekyll-feed
+
+feed:
+  path: feed.xml
+
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+      section: blog
+      cwd: ~/blog
+
+exclude:
+  - old_site
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - vendor
+  - node_modules
+  - .bundle

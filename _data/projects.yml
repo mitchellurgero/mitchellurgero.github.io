@@ -1,0 +1,11 @@
+- name: android-media-sync
+  url: https://github.com/mitchellurgero/androidmediasync
+  status: active
+  lang: C#
+  summary: Syncs a Windows music library to Android, SD cards included.
+
+- name: kindle-shortcut-browser
+  url: https://github.com/mitchellurgero/kindle-shortcut-browser
+  status: active
+  lang: Shell
+  summary: Shortcut browser for the Kindle.

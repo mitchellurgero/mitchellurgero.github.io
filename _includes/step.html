@@ -1,0 +1,10 @@
+{%- if term_ms == nil -%}{%- assign term_ms = 300 -%}{%- endif -%}
+{%- assign step_chars = include.cmd | size -%}
+<section class="step" style="--at:{{ term_ms }}ms;--chars:{{ step_chars }}"{% if include.label %} aria-label="{{ include.label }}"{% endif %}>
+  <p class="prompt">{% include ps1.html cwd=include.cwd %} <span class="cmd">{{ include.cmd | escape }}</span></p>
+  {%- if include.out %}
+  <div class="out">{{ include.out }}</div>
+  {%- endif %}
+</section>
+{%- assign step_type = step_chars | times: 28 -%}
+{%- assign term_ms = term_ms | plus: step_type | plus: 260 -%}

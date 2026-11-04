@@ -1,0 +1,29 @@
+---
+layout: default
+title: Blog
+section: blog
+cwd: ~/blog
+---
+{%- assign term_ms = 150 -%}
+
+{%- capture out -%}
+{%- if site.posts.size > 0 -%}
+<p class="dim">total {{ site.posts.size }}</p>
+<ul class="post-list">
+  {%- for post in site.posts %}
+  <li>
+    <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y-%m-%d" }}</time>
+    <a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
+    {%- if post.description %}
+    <span class="excerpt">{{ post.description | escape }}</span>
+    {%- endif %}
+  </li>
+  {%- endfor %}
+</ul>
+{%- else -%}
+<p class="dim">total 0</p>
+{%- endif -%}
+{%- endcapture -%}
+{% include step.html cmd="ls -lt" cwd="~/blog" out=out label="All posts" %}
+
+{% include idle.html cwd="~/blog" %}

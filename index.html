@@ -1,132 +1,77 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#ffffff">
-    <title>Mitchell's Website</title>
-    <link rel="stylesheet" href="vendor/system.css/system.css">
-    <link rel="stylesheet" href="styles.css">
-  </head>
-  <body>
-    <div class="intro" id="intro" aria-label="Intro animation">
-      <iframe
-        id="intro-frame"
-        title="Lord Nikon-inspired boot animation"
-        data-src="lord-bootup.html"
-      ></iframe>
-      <button class="skip-intro" id="skip-intro" type="button">Skip intro</button>
-    </div>
+---
+layout: default
+section: home
+---
+{%- assign term_ms = 250 -%}
 
-    <header class="menu-bar" aria-label="System menu">
-      <ul role="menu-bar">
-        <li role="menu-item" aria-label="Apple menu">
-          <!-- <button class="apple menu-button" type="button" aria-label="Apple menu"></button> -->
-        </li>
-        <li role="menu-item" tabindex="0" aria-haspopup="true">
-          File
-          <ul role="menu">
-            <li role="menu-item"><a href="#profile">Open Profile</a></li>
-            <li role="menu-item"><a href="https://github.com/mitchellurgero" target="_blank" rel="noreferrer">Open GitHub</a></li>
-          </ul>
-        </li>
-        <li role="menu-item" tabindex="0" aria-haspopup="true">
-          Edit
-          <ul role="menu">
-            <li role="menu-item"><button type="button" disabled>Undo</button></li>
-            <li role="menu-item" class="divider"><button type="button" disabled>Cut</button></li>
-            <li role="menu-item"><button type="button" disabled>Copy</button></li>
-            <li role="menu-item"><button type="button" disabled>Paste</button></li>
-          </ul>
-        </li>
-        <li role="menu-item" tabindex="0" aria-haspopup="true">
-          View
-          <ul role="menu">
-            <li role="menu-item"><button type="button">by Icon</button></li>
-            <li role="menu-item"><button type="button">by Name</button></li>
-            <li role="menu-item" class="divider"><button id="replay-intro" type="button">Replay Intro</button></li>
-          </ul>
-        </li>
-        <li role="menu-item" tabindex="0" aria-haspopup="true">
-          Credits
-          <ul role="menu">
-            <li role="menu-item">
-              <a href="https://github.com/mainframed/Hackers-Plymouth" target="_blank" rel="noreferrer">Boot Animation Source</a>
-            </li>
-          </ul>
-        </li>
-        <!-- <li role="menu-item" tabindex="0" aria-haspopup="true">
-          Special
-          <ul role="menu">
-            <li role="menu-item"><button type="button">Clean Up Desktop</button></li>
-            <li role="menu-item" class="divider"><button id="replay-intro" type="button">Replay Intro</button></li>
-          </ul>
-        </li> -->
-      </ul>
-      <time id="clock" aria-label="Current time">12:00 PM</time>
-    </header>
+{%- capture out -%}
+<h1 class="name">{{ site.author.name }}</h1>
+<p class="role">IT consultant by day, freelance programmer by night.</p>
+{%- endcapture -%}
+{% include step.html cmd="whoami" out=out label="Who I am" %}
 
-    <main class="desktop" aria-label="Desktop">
-      <nav class="desktop-icons" aria-label="Desktop items">
-        <a class="desktop-item" href="https://github.com/mitchellurgero" target="_blank" rel="noreferrer">
-          <span class="disk-icon" aria-hidden="true"><i></i></span>
-          <span>GitHub</span>
-        </a>
-        <button class="desktop-item trash-item" type="button">
-          <span class="trash-icon" aria-hidden="true"><i></i></span>
-          <span>Trash</span>
-        </button>
-      </nav>
+{%- capture out -%}
+<p>I work as an IT consultant and web developer, which mostly means keeping servers healthy, automating the boring parts, and building things for the web. After hours I write software for fun and for hire.</p>
+<p>Away from work I tinker with retro computers and old game consoles, the kind of hardware where you can still understand the whole machine.</p>
+{%- endcapture -%}
+{% include step.html cmd="cat about.txt" out=out label="About" %}
 
-      <section class="window finder-window" id="profile" aria-labelledby="finder-title">
-        <div class="title-bar">
-          <button class="close" type="button" aria-label="Close window"><span>Close</span></button>
-          <h1 class="title" id="finder-title">Mitchell Urgero</h1>
-          <button class="resize" type="button" aria-label="Resize window"><span>Resize</span></button>
-        </div>
-        <div class="details-bar">
-          <span>Personal File</span>
-          <span>System Online</span>
-          <span>Local Node</span>
-        </div>
-        <div class="window-pane profile-pane">
-          <div class="profile-header">
-            <div class="computer-icon" aria-hidden="true"><span>MU</span></div>
-            <div>
-              <p class="overline">WELCOME TO MY SYSTEM</p>
-              <h2>Mitchell Urgero</h2>
-              <p class="role">IT consultant by day, freelance programmer by night.</p>
-            </div>
-          </div>
+{%- capture out -%}
+<ul class="ls-grid">
+  <li class="dir">retro-computers/</li>
+  <li class="dir">game-consoles/</li>
+  <li class="dir">homelab/</li>
+  <li class="dir">automation/</li>
+  <li class="dir">web-dev/</li>
+  <li class="dir">open-source/</li>
+</ul>
+<p class="stack"><span class="dim">stack:</span> C# &middot; PHP &middot; Node.js &middot; TypeScript &middot; HTML/CSS &middot; Linux servers</p>
+{%- endcapture -%}
+{% include step.html cmd="ls ~/interests" out=out label="Interests" %}
 
-          <hr>
+{%- capture out -%}
+<table class="ls-long">
+  <caption class="dim">total {{ site.data.projects.size }}</caption>
+  <thead class="visually-hidden">
+    <tr><th>Status</th><th>Language</th><th>Project</th><th>Summary</th></tr>
+  </thead>
+  <tbody>
+    {%- for p in site.data.projects %}
+    <tr>
+      <td class="status status-{{ p.status | slugify }}">{{ p.status }}</td>
+      <td class="dim">{{ p.lang }}</td>
+      <td><a href="{{ p.url }}" rel="noreferrer">{{ p.name }}/</a></td>
+      <td class="summary">{{ p.summary }}</td>
+    </tr>
+    {%- endfor %}
+  </tbody>
+</table>
+{%- endcapture -%}
+{% include step.html cmd="ls -l ~/projects" out=out label="Active projects" %}
 
-          <p class="bio">Currently working as an IT Consultant and Web Developer. I love tinkering with Retro Computers / Retro Game Consoles.</p>
+{%- capture out -%}
+{%- if site.posts.size > 0 -%}
+<ul class="post-list">
+  {%- for post in site.posts limit: 5 %}
+  <li>
+    <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y-%m-%d" }}</time>
+    <a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
+  </li>
+  {%- endfor %}
+</ul>
+<p><a class="more" href="{{ '/blog/' | relative_url }}">cd ~/blog</a> <span class="dim"># {{ site.posts.size }} total</span></p>
+{%- else -%}
+<p class="dim">ls: ~/blog: nothing here yet</p>
+{%- endif -%}
+{%- endcapture -%}
+{% include step.html cmd="ls -t ~/blog | head -5" out=out label="Latest posts" %}
 
-          <div class="profile-columns">
-            <section aria-labelledby="skills-title">
-              <h3 id="skills-title">Capabilities</h3>
-              <ul>
-                <li>C# / PHP</li>
-                <li>Node.js / TypeScript</li>
-                <li>HTML / CSS / JavaScript</li>
-                <li>Servers &amp; automation</li>
-              </ul>
-            </section>
-            <section id="projects" aria-labelledby="projects-title">
-              <h3 id="projects-title">Quick Access</h3>
-              <a class="file-link" href="https://github.com/mitchellurgero/androidmediasync" target="_blank" rel="noreferrer"><span class="small-folder" aria-hidden="true"></span>Android Media Sync</a>
-              <a class="file-link" href="https://github.com/mitchellurgero/kindle-shortcut-browser" target="_blank" rel="noreferrer"><span class="small-folder" aria-hidden="true"></span>Kindle Shortcut Browser</a>
-            </section>
-          </div>
+{%- capture out -%}
+<dl class="kv">
+  <dt>github</dt><dd><a href="https://github.com/{{ site.author.github }}" rel="me noreferrer">github.com/{{ site.author.github }}</a></dd>
+  <dt>rss</dt><dd><a href="{{ '/feed.xml' | relative_url }}">{{ site.url | remove: 'https://' }}/feed.xml</a></dd>
+</dl>
+{%- endcapture -%}
+{% include step.html cmd="cat contact.txt" out=out label="Contact" %}
 
-          <div class="profile-actions" id="contact">
-            <a class="btn btn-default" href="https://github.com/mitchellurgero" target="_blank" rel="noreferrer">Open GitHub</a>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <script src="script.js"></script>
-  </body>
-</html>
+{% include idle.html %}
